@@ -1,0 +1,722 @@
+/* ==========================================================================
+   ÍNDICE DO CSS
+   1. Variáveis e Reset (Configurações Gerais)
+   2. Classes Utilitárias (Botões, containers, divisores, margens)
+   3. Cabeçalho (Navbar)
+   4. PÁGINA INICIAL (index.html)
+      4.1. Seção Início (Hero)
+      4.2. Seção Sobre Nós
+      4.3. Seção Apoio Estudantil (Carrossel)
+      4.4. Seção Eventos (Cards)
+   5. PÁGINA DA GESTÃO (gestao.html)
+   6. Rodapé (Footer)
+   7. Responsividade (Celulares e Tablets)
+   ========================================================================== */
+
+/* ==========================================================================
+   1. VARIÁVEIS E RESET
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+:root {
+    --bg-light: #F8FAFC;
+    --bg-dark: #0F172A;
+    --text-main: #334155;
+    --text-light: #F8FAFC;
+    --accent-blue: #1E293B;
+
+    /* Cores da Paleta da Gestão Prometheus */
+    --accent-fire: #ac0517;
+    /* Morangão (Usado no tema geral) */
+    --chapa-orange: #f46524;
+    /* Laranja Madura */
+    --chapa-dark: #2d5738;
+    /* Verde Mato */
+    --chapa-light: #a5d360;
+    /* Amarelo Esverdeado */
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-main);
+    background-color: var(--bg-light);
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   2. CLASSES UTILITÁRIAS GLOBAIS (Reaproveitadas em várias páginas)
+   ========================================================================== */
+.container {
+    max-width: 68.75rem;
+    margin: 0 auto;
+}
+
+.section-light,
+.section-dark {
+    padding: 6.25rem 5%;
+}
+
+.section-dark {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+}
+
+.layout-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.text-content h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    margin-bottom: 1rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-light {
+    color: var(--text-light) !important;
+}
+
+.img-destaque {
+    width: 100%;
+    max-width: 25rem;
+    display: block;
+    margin: 0 auto;
+    filter: drop-shadow(0 0.625rem 1rem rgba(0, 0, 0, 0.1));
+}
+
+/* --- Botões --- */
+.btn-primary {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: var(--accent-blue);
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 2rem;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-fire);
+    transform: translateY(-0.2rem);
+}
+
+.btn-secundary {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: var(--bg-light);
+    color: var(--accent-blue);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 2rem;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.btn-secundary:hover {
+    background-color: var(--accent-fire);
+    transform: translateY(-0.2rem);
+    color: var(--bg-light);
+}
+
+.btn-ouvidoria {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: var(--bg-light);
+    color: var(--accent-blue);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 2rem;
+    transition: background 0.3s, transform 0.2s;
+    margin-bottom: 1.25rem;
+}
+
+.btn-ouvidoria:hover {
+    background-color: var(--accent-fire);
+    transform: translateY(-0.2rem);
+    color: var(--bg-light);
+}
+
+/* --- Divisores --- */
+.divider {
+    height: 0.25rem;
+    width: 3.75rem;
+    background-color: var(--accent-blue);
+    margin-bottom: 1.5rem;
+}
+
+.divider.center,
+.divider-fire.center,
+.divider-white.center {
+    margin: 0 auto 2.5rem auto;
+}
+
+.divider-fire {
+    height: 0.25rem;
+    width: 3.75rem;
+    background-color: var(--accent-fire);
+    margin-bottom: 1.5rem;
+}
+
+.divider-white {
+    height: 0.25rem;
+    width: 3.75rem;
+    background-color: var(--text-light);
+    margin-bottom: 1.5rem;
+}
+
+.highlight-fire {
+    color: var(--accent-fire);
+}
+
+/* --- Espaçamentos Extras (Margens e Paddings) --- */
+.section-py-sm {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.section-py-md {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
+
+.mb-large {
+    margin-bottom: 4rem;
+}
+
+.mt-0 {
+    margin-top: 0;
+}
+
+/* ==========================================================================
+   3. CABEÇALHO (Navbar)
+   ========================================================================== */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.05);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    text-decoration: none;
+}
+
+.logo-nav {
+    height: 3.0rem;
+    width: auto;
+}
+
+.logo-text {
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--accent-blue);
+    letter-spacing: 0.05rem;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.25rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--accent-fire);
+}
+
+
+
+/* ==========================================================================
+   4. PÁGINA INICIAL (index.html)
+   ========================================================================== */
+
+/* --- 4.1. Seção Início (Hero) --- */
+
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 1.25rem;
+    margin-top: 4rem;
+    position: relative;
+    overflow: hidden;
+    /* Não deixa a foto vazar do bloco */
+}
+
+/* Container que segura as fotos no fundo */
+.hero-slideshow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* Estilo de cada foto (elas preenchem a tela e começam invisíveis) */
+.hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    /* Efeito suave de transição */
+}
+
+/* A foto que estiver com a classe 'active' aparece */
+.hero-slide.active {
+    opacity: 1;
+}
+
+/* Película escura por cima das fotos para o texto não sumir */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.75);
+    /* Cor escura semi-transparente */
+    z-index: 2;
+}
+
+/* Traz o texto para a frente de tudo */
+.hero-content {
+    position: relative;
+    z-index: 3;
+}
+
+.hero-content h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--text-light);
+    /* Agora o título principal é claro */
+    margin-bottom: 1.25rem;
+}
+
+/* O vermelho do título continua aqui */
+.hero-content h1 span {
+    color: var(--accent-fire);
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    /* O subtítulo agora é claro */
+    max-width: 37.5rem;
+    margin: 0 auto 1.875rem auto;
+}
+
+/* --- 4.2. Seção Sobre Nós --- */
+.gestao-title {
+    margin-top: 1.5rem;
+    color: var(--accent-blue);
+}
+
+.gestao-description {
+    margin-bottom: 1.5rem;
+}
+
+/* --- 4.3. Seção Apoio Estudantil (Carrossel) --- */
+.section-subtitle {
+    margin-bottom: 2.5rem;
+    max-width: 40rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.carousel-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+    gap: 1rem;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 1.875rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 1rem 0.5rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.carousel-track::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel-card {
+    min-width: 18.75rem;
+    max-width: 22rem;
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+    color: var(--text-main);
+}
+
+.carousel-card h3 {
+    color: var(--accent-fire);
+}
+
+.carousel-btn {
+    background-color: var(--text-light);
+    color: var(--accent-blue);
+    border: none;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s, transform 0.2s, color 0.3s;
+    flex-shrink: 0;
+    z-index: 2;
+    box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.2);
+}
+
+.carousel-btn:hover {
+    background-color: var(--accent-fire);
+    color: var(--text-light);
+    transform: scale(1.1);
+}
+
+/* --- 4.4. Seção Eventos (Cards) --- */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr));
+    gap: 1.875rem;
+}
+
+.card {
+    background: #fff;
+    color: var(--text-main);
+    padding: 2.5rem 1.875rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 0.25rem 1.25rem rgba(0, 0, 0, 0.03);
+    transition: transform 0.3s;
+    text-align: left;
+    border-top: 0.25rem solid var(--accent-blue);
+}
+
+.card:hover {
+    transform: translateY(-0.3rem);
+    border-top-color: var(--accent-fire);
+}
+
+.card-date {
+    font-weight: 800;
+    color: var(--accent-fire);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    margin-bottom: 0.625rem;
+}
+
+.card h3 {
+    margin-bottom: 1rem;
+    color: var(--accent-blue);
+}
+
+/* ==========================================================================
+   5. PÁGINA DA GESTÃO (gestao.html)
+   ========================================================================== */
+.hero-gestao {
+    height: auto;
+    padding: 8rem 1.25rem 4rem 1.25rem;
+}
+
+/* --- Correção da cor do título e do texto na página Gestão --- */
+.hero-gestao h1 {
+    color: var(--accent-blue);
+    /* Deixa o título azul escuro */
+}
+
+.hero-gestao p {
+    color: var(--text-main);
+    /* Deixa o parágrafo cinza escuro (padrão de leitura) */
+}
+
+.dept-title {
+    font-size: 2rem;
+    color: var(--accent-blue);
+    margin-bottom: 0.5rem;
+}
+
+.profile-card {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-img {
+    width: 7.5rem;
+    height: 7.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border: 0.25rem solid var(--bg-light);
+    box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.1);
+}
+
+.role-badge {
+    display: inline-block;
+    padding: 0.25rem 1rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+/* Cores das etiquetas por departamento */
+.badge-red {
+    background-color: var(--accent-fire);
+    color: var(--text-light);
+}
+
+.badge-orange {
+    background-color: var(--chapa-orange);
+    color: var(--text-light);
+}
+
+.badge-dark {
+    background-color: var(--chapa-dark);
+    color: var(--text-light);
+}
+
+.badge-light {
+    background-color: var(--chapa-light);
+    color: var(--text-main);
+}
+
+.course-info {
+    font-size: 0.85rem;
+    color: #64748B;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #E2E8F0;
+    width: 100%;
+}
+
+.role-desc {
+    font-size: 0.95rem;
+}
+
+.team-list {
+    list-style: none;
+    margin-top: 1.25rem;
+}
+
+.team-list li {
+    margin-bottom: 0.625rem;
+    padding-bottom: 0.625rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- Bloco de Propostas --- */
+.proposals-container {
+    margin-top: 2.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    text-align: left;
+    max-width: 50rem;
+    /* Adicionando a transição suave para as animações */
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+/* Animação: Faz o box flutuar e aumenta a sombra ao passar o mouse */
+.proposals-container:hover {
+    transform: translateY(-0.3rem);
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.08);
+}
+
+/* Variante para Seção Clara */
+.section-light .proposals-container {
+    background-color: #ffffff;
+    border-left: 5px solid var(--accent-blue);
+    box-shadow: 0 0.25rem 1.25rem rgba(0, 0, 0, 0.05);
+}
+
+/* Animação: Muda a borda azul para vermelha no hover (Seção Clara) */
+.section-light .proposals-container:hover {
+    border-left-color: var(--accent-fire);
+}
+
+/* Variante para Seção Escura */
+.section-dark .proposals-container {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-left: 5px solid var(--accent-fire);
+}
+
+.proposals-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05rem;
+}
+
+.section-light .proposals-title {
+    color: var(--accent-blue);
+}
+
+.section-dark .proposals-title {
+    color: var(--accent-fire);
+}
+
+.proposals-list {
+    font-size: 0.95rem;
+}
+
+/* Estilo para a logo da chapa na página Gestão */
+.logo-hero {
+    width: 100%;
+    max-width: 180px;
+    /* Tamanho ideal para não esconder o texto */
+    height: auto;
+    margin-bottom: 1.5rem;
+    /* Espaço entre a logo e o título "GESTÃO PROMETHEUS" */
+    filter: drop-shadow(0 0.5rem 1rem rgba(0, 0, 0, 0.15));
+    /* Sombra suave para dar profundidade */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Ajuste para telas pequenas (celular) */
+@media (max-width: 48em) {
+    .logo-hero {
+        max-width: 140px;
+        /* Diminui um pouco a logo no celular */
+        margin-bottom: 1rem;
+    }
+}
+
+/* ==========================================================================
+   6. RODAPÉ (Footer)
+   ========================================================================== */
+.footer {
+    background-color: var(--accent-blue);
+    color: var(--text-light);
+    text-align: center;
+    padding: 3.75rem 5% 1.875rem 5%;
+}
+
+.social-links {
+    margin: 0.75rem 0 1.25rem 0;
+}
+
+.social-links a {
+    color: var(--text-light);
+    text-decoration: none;
+    margin: 0 1rem;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s;
+}
+
+.social-links a:hover {
+    border-color: var(--accent-fire);
+}
+
+.copyright {
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+/* --- Novas Classes Utilitárias --- */
+.pt-large {
+    padding-top: 8rem;
+    padding-bottom: 4rem;
+}
+
+.text-constrained {
+    max-width: 37.5rem;
+    /* Equivalente a 600px */
+    margin: 0 auto;
+}
+
+.mb-medium {
+    margin-bottom: 1.5rem;
+}
+
+.iframe-responsive {
+    max-width: 40rem;
+    /* Equivalente a 640px */
+    width: 100%;
+}
+
+/* ==========================================================================
+   7. RESPONSIVIDADE (Celulares e Tablets)
+   ========================================================================== */
+@media (max-width: 48em) {
+    .carousel-btn {
+        display: none;
+    }
+
+    .carousel-card {
+        scroll-snap-align: start;
+    }
+
+    .layout-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .layout-grid.reverse .image-content {
+        order: -1;
+    }
+
+    .divider,
+    .divider-fire {
+        margin: 0 auto 1.5rem auto;
+    }
+
+    .nav-links {
+        display: none;
+    }
+}
