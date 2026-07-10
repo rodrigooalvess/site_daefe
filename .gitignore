@@ -1,0 +1,20 @@
+# Arquivos de sistema (macOS / Windows)
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Arquivos de editores/IDEs
+.vscode/
+.idea/
+*.swp
+
+# Node (só se um dia usar algum build tool, ex: Vite, live-server via npm etc.)
+node_modules/
+npm-debug.log
+
+# Variáveis de ambiente (se um dia tiver alguma chave/API)
+.env
+
+# Backups/temporários comuns de editores de texto
+*~
+*.bak
